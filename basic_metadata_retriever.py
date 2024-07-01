@@ -3,6 +3,7 @@ import json
 import time
 from alive_progress import alive_bar
 from datetime import datetime
+import argparse
 
 import os
 from dotenv import load_dotenv
@@ -12,6 +13,9 @@ load_dotenv()
 token = os.getenv('TOKEN')
 headers = {'Authorization': f'token {token}'}
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--row', action="store", dest='row', default=0)
+args = parser.parse_args()
 
 def get_details(tuple):
     owner = tuple[0]
@@ -40,7 +44,7 @@ if __name__ == "__main__":
     output = {}
     counter = 1
 
-    start_row_num = 12636
+    start_row_num = int(args.row)
     total_rows = 27270
 
     print(f"START TIME: {datetime.now()}")
@@ -78,5 +82,11 @@ if __name__ == "__main__":
                         json.dump(output, f, ensure_ascii=False, indent=4)
                         print(f"FILE {filename} saved")
                         output = {}
+
+        filename = "last_bucket"
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(output, f, ensure_ascii=False, indent=4)
+            print(f"FILE {filename} saved")
+            output = {}
 
     print(f"END TIME: {datetime.now()}")
