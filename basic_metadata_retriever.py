@@ -12,10 +12,6 @@ load_dotenv()
 token = os.getenv('TOKEN')
 headers = {'Authorization': f'token {token}'}
 
-repos = []
-output = {}
-counter = 1
-
 
 def get_details(tuple):
     owner = tuple[0]
@@ -39,6 +35,10 @@ def get_details(tuple):
 
 
 if __name__ == "__main__":
+
+    repos = []
+    output = {}
+    counter = 1
 
     print(f"START TIME: {datetime.now()}")
 
@@ -69,7 +69,11 @@ if __name__ == "__main__":
                 row = repos_file.readline()
                 counter += 1
 
-    with open('data_2.json', 'w', encoding='utf-8') as f:
-        json.dump(output, f, ensure_ascii=False, indent=4)
+                if counter % 1000 == 0:
+                    filename = 'data_' + str(counter / 1000) + '.json'
+                    with open(filename, 'w', encoding='utf-8') as f:
+                        json.dump(output, f, ensure_ascii=False, indent=4)
+                        print(f"FILE {filename} saved")
+                        output = {}
 
     print(f"END TIME: {datetime.now()}")
