@@ -40,14 +40,17 @@ if __name__ == "__main__":
     output = {}
     counter = 1
 
+    start_row_num = 12636
+    total_rows = 27270
+
     print(f"START TIME: {datetime.now()}")
 
     with open('reuse_repository.csv', 'r') as repos_file:
-        with alive_bar(27270 - 12636) as bar:
+        with alive_bar(total_rows - start_row_num) as bar:
             row = repos_file.readline()
             while row:
                 try:
-                    if counter > 12636:
+                    if counter > start_row_num:
                         start = time.time()
                         columns = row.split(",")
                         info_tuple = (columns[1], columns[2])
@@ -69,7 +72,7 @@ if __name__ == "__main__":
                 row = repos_file.readline()
                 counter += 1
 
-                if counter % 1000 == 0:
+                if counter % 1000 == 0 and counter > start_row_num:
                     filename = 'data_' + str(counter / 1000) + '.json'
                     with open(filename, 'w', encoding='utf-8') as f:
                         json.dump(output, f, ensure_ascii=False, indent=4)
