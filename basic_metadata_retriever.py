@@ -46,7 +46,7 @@ if __name__ == "__main__":
     print(f"START TIME: {datetime.now()}")
 
     with open('reuse_repository.csv', 'r') as repos_file:
-        with alive_bar(total_rows - start_row_num) as bar:
+        with alive_bar(total_rows) as bar:
             row = repos_file.readline()
             while row:
                 try:
@@ -65,12 +65,12 @@ if __name__ == "__main__":
                         else:
                             time_sleep = (2.2 - time_spent)
                             time.sleep(time_sleep)
-                        bar()
 
                 except Exception as e:
                     print(e)
                 row = repos_file.readline()
                 counter += 1
+                bar()
 
                 if counter % 1000 == 0 and counter > start_row_num:
                     filename = 'data_' + str(counter / 1000) + '.json'
