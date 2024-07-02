@@ -14,8 +14,8 @@ token = os.getenv('TOKEN')
 headers = {'Authorization': f'token {token}'}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--start_row', action="store", dest='row', default=0)
-parser.add_argument('--end_row', action="store", dest='row', default=0)
+parser.add_argument('--srow', action="store", dest='row', default=0)
+parser.add_argument('--erow', action="store", dest='row', default=0)
 
 args = parser.parse_args()
 
@@ -46,8 +46,8 @@ if __name__ == "__main__":
     output = {}
     counter = 1
 
-    start_row_num = int(args.start_row)
-    end_row = int(args.end_row)
+    start_row_num = int(args.srow)
+    end_row = int(args.erow)
 
     print(f"START TIME: {datetime.now()}")
 
