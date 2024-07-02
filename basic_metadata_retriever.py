@@ -14,7 +14,9 @@ token = os.getenv('TOKEN')
 headers = {'Authorization': f'token {token}'}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--row', action="store", dest='row', default=0)
+parser.add_argument('--start_row', action="store", dest='row', default=0)
+parser.add_argument('--end_row', action="store", dest='row', default=0)
+
 args = parser.parse_args()
 
 def get_details(tuple):
@@ -44,15 +46,15 @@ if __name__ == "__main__":
     output = {}
     counter = 1
 
-    start_row_num = int(args.row)
-    total_rows = 27270
+    start_row_num = int(args.start_row)
+    end_row = int(args.end_row)
 
     print(f"START TIME: {datetime.now()}")
 
     with open('reuse_repository.csv', 'r') as repos_file:
-        with alive_bar(total_rows) as bar:
+        with alive_bar(end_row) as bar:
             row = repos_file.readline()
-            while row:
+            while row and counter <= end_row:
                 try:
                     if counter > start_row_num:
                         start = time.time()
