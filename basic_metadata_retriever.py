@@ -15,7 +15,7 @@ headers = {'Authorization': f'token {token}'}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--srow', action="store", dest='srow', default=0)
-parser.add_argument('--erow', action="store", dest='erow', default=0)
+parser.add_argument('--erow', action="store", dest='erow', default=27270)
 
 args = parser.parse_args()
 
@@ -78,17 +78,17 @@ if __name__ == "__main__":
                 counter += 1
                 bar()
 
-                if counter % 1000 == 0 and counter > start_row_num:
-                    filename = 'data_' + str(counter / 1000) + '.json'
-                    with open(filename, 'w', encoding='utf-8') as f:
-                        json.dump(output, f, ensure_ascii=False, indent=4)
-                        print(f"FILE {filename} saved")
-                        output = {}
+                # if counter % 1000 == 0 and counter > start_row_num:
+                #     filename = 'data_' + str(counter / 1000) + '.json'
+                #     with open(filename, 'w', encoding='utf-8') as f:
+                #         json.dump(output, f, ensure_ascii=False, indent=4)
+                #         print(f"FILE {filename} saved")
+                #         output = {}
 
-        filename = "last_bucket.json˚"
-        with open(filename, 'w', encoding='utf-8') as f:
-            json.dump(output, f, ensure_ascii=False, indent=4)
-            print(f"FILE {filename} saved")
-            output = {}
+    filename = "data.json˚"
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(output, f, ensure_ascii=False, indent=4)
+        print(f"FILE {filename} saved")
+        output = {}
 
     print(f"END TIME: {datetime.now()}")
