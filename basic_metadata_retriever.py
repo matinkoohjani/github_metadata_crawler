@@ -14,8 +14,8 @@ token = os.getenv('TOKEN')
 headers = {'Authorization': f'token {token}'}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--srow', action="store", dest='row', default=0)
-parser.add_argument('--erow', action="store", dest='row', default=0)
+parser.add_argument('--srow', action="store", dest='srow', default=0)
+parser.add_argument('--erow', action="store", dest='erow', default=0)
 
 args = parser.parse_args()
 
