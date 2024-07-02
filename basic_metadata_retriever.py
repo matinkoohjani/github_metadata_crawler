@@ -66,10 +66,10 @@ if __name__ == "__main__":
                             "commits"] = get_details(info_tuple)
                         end = time.time()
                         time_spent = end - start
-                        if time_spent > 2.2:
+                        if time_spent > 2.5:
                             pass
                         else:
-                            time_sleep = (2.2 - time_spent)
+                            time_sleep = (2.5 - time_spent)
                             time.sleep(time_sleep)
 
                 except Exception as e:
